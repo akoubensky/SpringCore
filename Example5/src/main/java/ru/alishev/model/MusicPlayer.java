@@ -14,9 +14,21 @@ import javax.annotation.PreDestroy;
 
 @Component
 public class MusicPlayer {
-    @Autowired
-    ApplicationContext context;
+    //@Autowired
+    private final ApplicationContext context;
 
+    public MusicPlayer(ApplicationContext context) {
+        this.context = context;
+    }
+
+
+    @Autowired
+    public MusicPlayer(ApplicationContext context, String musicName) {
+        this.context = context;
+        music = context.getBean(musicName, Music.class);
+    }
+
+    @Autowired
     private Music music;
 
     @Value("${player-name}")
